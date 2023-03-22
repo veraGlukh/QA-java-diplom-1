@@ -17,8 +17,8 @@ import static org.junit.Assert.assertTrue;
 public class BurgerTest {
 
     String bunName = "white bun";
-    String ingredientName1 = "sour cream";
-    String ingredientName2 = "cutlet";
+    String firstIngredientName = "sour cream";
+    String secondIngredientName = "cutlet";
 
     @Mock
     Bun bunMock;
@@ -41,9 +41,9 @@ public class BurgerTest {
     @Test
     public void addIngredientTest() {
         Burger burger = new Burger();
-        Mockito.when(ingredientMock1.getName()).thenReturn(ingredientName1);
+        Mockito.when(ingredientMock1.getName()).thenReturn(firstIngredientName);
         burger.addIngredient(ingredientMock1);
-        String expectedIngredientName = ingredientName1;
+        String expectedIngredientName = firstIngredientName;
         String actualIngredientName = burger.ingredients.get(0).getName();
         assertEquals("Название выбранного ингредиента не соответствует:", expectedIngredientName, actualIngredientName);
     }
@@ -61,9 +61,9 @@ public class BurgerTest {
         Burger burger = new Burger();
         burger.addIngredient(ingredientMock1);
         burger.addIngredient(ingredientMock2);
-        Mockito.when(ingredientMock2.getName()).thenReturn(ingredientName2);
+        Mockito.when(ingredientMock2.getName()).thenReturn(secondIngredientName);
         burger.moveIngredient(1,0);
-        String expectedIngredientName = ingredientName2;
+        String expectedIngredientName = secondIngredientName;
         String actualIngredientName = burger.ingredients.get(0).getName();
         assertEquals("Название перемещенного ингредиента не соответствует:", expectedIngredientName, actualIngredientName);
     }
@@ -89,19 +89,19 @@ public class BurgerTest {
         Mockito.when(bunMock.getPrice()).thenReturn(200F);
         burger.setBuns(bunMock);
 
-        Mockito.when(ingredientMock1.getName()).thenReturn(ingredientName1);
+        Mockito.when(ingredientMock1.getName()).thenReturn(firstIngredientName);
         Mockito.when(ingredientMock1.getType()).thenReturn(IngredientType.SAUCE);
         Mockito.when(ingredientMock1.getPrice()).thenReturn(200F);
         burger.addIngredient(ingredientMock1);
 
-        Mockito.when(ingredientMock2.getName()).thenReturn(ingredientName2);
+        Mockito.when(ingredientMock2.getName()).thenReturn(secondIngredientName);
         Mockito.when(ingredientMock2.getType()).thenReturn(IngredientType.FILLING);
         Mockito.when(ingredientMock2.getPrice()).thenReturn(100F);
         burger.addIngredient(ingredientMock2);
 
         String expectedReceipt = "(==== " + bunName + " ====)\r\n" +
-                "= " + IngredientType.SAUCE.name().toLowerCase() + " " + ingredientName1 + " =\r\n" +
-                "= " + IngredientType.FILLING.name().toLowerCase() + " " + ingredientName2 + " =\r\n" +
+                "= " + IngredientType.SAUCE.name().toLowerCase() + " " + firstIngredientName + " =\r\n" +
+                "= " + IngredientType.FILLING.name().toLowerCase() + " " + secondIngredientName + " =\r\n" +
                 "(==== " + bunName + " ====)\r\n" +
                 "\r\n" +
                 "Price: 700,000000" +
